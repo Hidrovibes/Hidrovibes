@@ -1,9 +1,9 @@
 const Footer = () => {
     return (
       <div>
-        <footer className="bg-black py-6 fixed bottom-0 w-full text-center">
+        <footer className="bg-white py-6 fixed bottom-0 w-full text-center">
           <div className="container mx-auto">
-            <p className="text-gray-300">
+            <p className="text-black-300">
               Copyright © Hidrovibes 2024 Derechos Reservados.
             </p>
           </div>
