@@ -1,31 +1,13 @@
-import Image from "next/image";
-
 const bannerItem = {
   title: "Ecologico y sencillo",
   subtitle: "Desde la comodidad de tu casa",
   image: "https://cdn.pixabay.com/photo/2017/03/13/12/16/greenhouse-2139526_1280.jpg"
 };
-
-const cardItems = [
-  {
-    id: 1,
-    title: "Seguridad residencial",
-    subtitle: "Protección a tu familia y patrimonio",
-    image: "https://cdn.pixabay.com/photo/2017/01/18/23/59/insurance-1991226_640.jpg"
-  },
-  {
-    id: 2,
-    title: "Empresas y espacios coorporativos",
-    subtitle: "Solución profesional para integrar sistemas de alarma, videovigilancia y control de accesos.",
-    image: "https://media.istockphoto.com/id/670723856/es/foto/c%C3%A1mara-de-seguridad-en-la-corporaci%C3%B3n.jpg?s=612x612&w=0&k=20&c=k8N07rmvppOMJ8c43h7tju6v41z86ZqoSl81i9Q2F8Q="
-  },
-  {
-    id: 3,
-    title: "Espacios educativos",
-    subtitle: "Garantiza la seguridad de un colegio y a sus alumnos",
-    image: "https://media.istockphoto.com/id/1422516934/es/foto/vista-trasera-de-los-estudiantes-de-secundaria-que-estudian-en-el-aula.jpg?s=612x612&w=0&k=20&c=DdJpqkwd3dXFuMNu-vlesb9ig1My3xR3eyLIZdv-hkY="
-  }
-];
+const bannerItem2 = {
+  title: "Elige la practicidad",
+  subtitle: "Gracias a nosotros",
+  image: "https://ecologismos.com/wp-content/2012/05/greenwheel-un-cultuvo-hidroponico-de-uso-casero.jpg"
+};
 
 export default function Home() {
   return (
@@ -42,22 +24,38 @@ export default function Home() {
             <p className="text-2xl font-bold text-black">{bannerItem.subtitle}</p>
           </div>
         </div>
-        <div className="text-center py-4">
-          <h2 className="text-2xl font-bold text-black">Elige la mejor opción para ti</h2>
-        </div>
-        <div className="container mx-auto px-4 mt-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {cardItems.map((card) => (
-              <div key={card.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img className="w-full h-48 object-cover object-center" src={card.image} alt={card.title} />
-                <div className="p-4">
-                  <h3 className="font-bold text-xl mb-2 text-black">{card.title}</h3>
-                  <p className='text-black'>{card.subtitle}</p>
-                </div>
-              </div>
-            ))}
-          </div>  
-        </div>
+        <div className="m-10 mb-24">
+        <section className="mb-4 flex">
+      <div className="w-1/2">
+        <h2 className="font-bold text-4xl text-black-700">
+          ¿Quiénes somos?
+        </h2>
+        <br />
+        <br />
+        <p className="text-black text-justify">
+          En nuestra empresa, nos comprometemos con el cuidado del medio ambiente y queremos brindarte la oportunidad de cultivar tus propios vegetales desde la comodidad de tu hogar. Nuestra iniciativa está centrada en promover prácticas sostenibles y facilitarte el acceso a alimentos frescos y saludables, directamente desde tu jardín doméstico.
+          Únete a nosotros en este viaje hacia un estilo de vida más ecológico y autónomo.
+        </p>
+        <br />
+        <p className="text-black text-justify">
+          Descubre en Hidrovibes una solución sencilla y amigable para el cuidado de tus plantas. Con nuestra tecnología intuitiva, controla el riego, la nutrición y el ambiente de tus plantas de manera fácil y eficiente, garantizando un crecimiento saludable y sin complicaciones.
+        </p>
+      </div>
+      <div className="w-1/2 flex justify-center items-center">
+        <img
+          src="https://pbs.twimg.com/media/GJnfKzIXgAE14wG?format=jpg&name=small"
+          alt="Prototipo"
+          className="h-auto max-h-96 max-w-full"
+        />
+      </div>
+    </section>
+      </div>
+      <div className="relative w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url(${bannerItem2.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="absolute inset-0 flex flex-col justify-center items-center">
+        <h2 className="text-4xl font-bold text-white text-shadow-black">{bannerItem2.title}</h2>
+        <p className="text-2xl font-bold text-white">{bannerItem2.subtitle}</p>
+      </div>
+    </div>
       </main>
     </div>
   );
