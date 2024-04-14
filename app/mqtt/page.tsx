@@ -23,14 +23,13 @@ export default function Home() {
       });
     });
 
-    // Manejador de eventos cuando llega un mensaje
+  /*  // Manejador de eventos cuando llega un mensaje
     client.on('message', function (topic, message) {
       // Verificar si el mensaje es del tema deseado
       if (topic === 'sensores/humedad') {
         // Actualizar el estado con los nuevos datos recibidos
-        setDistanceData(prevData => [...prevData, parseFloat(message.toString())]);
-      }
-    });
+       setDistanceData(prevData => [...prevData, parseFloat(message.toString())]);
+    });*/
 
     // Limpiar la conexión cuando el componente se desmonta
     return () => {
