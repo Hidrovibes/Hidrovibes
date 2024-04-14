@@ -73,7 +73,7 @@ const Proyecto = () => {
             </p>
           </div>
           <div className="w-1/2 flex justify-center items-center">
-            <img src="https://www.bing.com/images/search?view=detailV2&ccid=mPblEyZn&id=B7FC83A72787B7DB7061698573ABA12F34720336&thid=OIP.mPblEyZnJ-HWV3m_15xYggFNC7&mediaurl=https%3a%2f%2fcdn.portalfruticola.com%2f2018%2f01%2f7900372b-arduinohardware.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.98f6e513266727e1d65779bfd79c5882%3frik%3dNgNyNC%252bhq3OFaQ%26pid%3dImgRaw%26r%3d0&exph=720&expw=1280&q=CONTROL+AUTIMATIZADO+PARA+UN+SISTEMA+HIDROPONICO&simid=608018656562455237&FORM=IRPRST&ck=FDDB79F9BF9300967B5ED87858438BC2&selectedIndex=4&itb=0" alt="Control Automatizado" className="h-auto max-h-96 rounded-lg" />
+            <img src="https://pbs.twimg.com/media/GLJjqHHXUAAORLx?format=png&name=small" className="h-auto max-h-96 rounded-lg" />
           </div>
         </section>
 
