@@ -85,7 +85,7 @@ const Proyecto = () => {
           <div className="w-1/2">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Acceso Fácil</h2>
             <p className="text-gray-700 mb-4">
-              El diseño circular giratorio facilita el acceso a todas las plantas para labores de cuidado, cosecha y mantenimiento sin la necesidad de moverse alrededor de la estructura.
+              El diseño circular facilita el acceso a todas las plantas para labores de cuidado, cosecha y mantenimiento sin la necesidad de moverse alrededor de la estructura.
             </p>
           </div>
         </section>
