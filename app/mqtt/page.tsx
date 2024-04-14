@@ -40,28 +40,22 @@ export default function Home() {
 
   return (
     <div>
-       <h1 className='font-serif text-2xl text-center font-medium text-blue-500 '>Distance Data</h1>
-      <br/>
-      <br/>
-      <LineChart width={800} height={400} data={distanceData.map((value, index) => ({ name: index + 1, distance: value }))}>
-  <XAxis dataKey="name" />
-  <YAxis domain={['auto', 'auto']} /> {/* Aquí invertimos el eje Y */}
-  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-  <Line type="monotone" dataKey="distance" stroke="#8884d8" />
-  <Tooltip />
-  <Legend />
-</LineChart>
-
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+    <header className="p-4 bg-white shadow-md">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="font-bold text-xl text-black">Hidrovibes</div>
+      </div>
+    </header>
+    <div className="container mx-auto mt-4 flex justify-center">
+      <div className="mr-4 p-4 bg-gray-200 rounded-md">
+        <div className="text-lg font-semibold">Temperatura</div>
+        {/* Aquí puedes agregar cualquier otro contenido relacionado con la temperatura */}
+      </div>
+      <div className="ml-4 p-4 bg-gray-200 rounded-md">
+        <div className="text-lg font-semibold">Humedad</div>
+        {/* Aquí puedes agregar cualquier otro contenido relacionado con la humedad */}
+      </div>
     </div>
+  </div>
     
   );
 }
