@@ -4,58 +4,84 @@ import mqtt from 'mqtt';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 export default function Home() {
-  const [distanceData, setDistanceData] = useState([]);
+    const [phData, setPhData] = useState<{ time: string; ph: number; }[]>([]);
 
-  useEffect(() => {
-    // Conexión al broker MQTT
-    const client = mqtt.connect('wss://broker.emqx.io:8083/mqtt');
+    useEffect(() => {
+        const client = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
+        
+        client.on('connect', function() {
+            console.log('Conectado al broker MQTT');
+            client.subscribe('Salida/01', function(err) {
+                if (!err) {
+                    console.log('Suscripción exitosa a Salida/01');
+                } else {
+                    console.error('Error en la suscripción:', err);
+                }
+            });
+        });
 
-    // Manejador de eventos cuando se conecta al broker
-    client.on('connect', function () {
-      console.log('Connected to MQTT broker');
-      // Suscripción al tema de interés
-      client.subscribe('casa/distancia', function (err) {
-        if (!err) {
-          console.log('Subscribed to casa/distancia');
-        } else {
-          console.error('Subscription error:', err);
-        }
-      });
-    });
+        client.on('message', function(topic, message) {
+            if (topic === 'Salida/01') {
+                const data = message.toString().trim().split(/[:,]/); // Dividir el mensaje en partes
+                console.log('Mensaje recibido:', data); // Depurar el mensaje recibido
+                if (data.length === 2) { // Verificar que haya dos partes en el mensaje
+                    const sensor = data[0].trim().toLowerCase(); // Convertir a minúsculas
+                    const valor = parseFloat(data[1].trim()); // Segundo valor es el valor del sensor
+                    const time = getCurrentTime(); // Obtener el tiempo actual
 
-  /*  // Manejador de eventos cuando llega un mensaje
-    client.on('message', function (topic, message) {
-      // Verificar si el mensaje es del tema deseado
-      if (topic === 'sensores/humedad') {
-        // Actualizar el estado con los nuevos datos recibidos
-       setDistanceData(prevData => [...prevData, parseFloat(message.toString())]);
-    });*/
+                    if (!isNaN(valor)) { // Verificar si el valor es un número válido
+                        if (sensor === 'ph') {
+                            setPhData(prevData => [...prevData, { time, ph: valor }]);
+                        }
+                    }
+                }
+            }
+        });
 
-    // Limpiar la conexión cuando el componente se desmonta
-    return () => {
-      client.end();
-      console.log('Disconnected from MQTT broker');
-    };
-  }, []); // La dependencia vacía asegura que este efecto solo se ejecute una vez
+        return () => {
+            client.end();
+            console.log('Desconectado del broker MQTT');
+        };
+    }, []);
 
-  return (
-    <div>
-    <header className="p-4 bg-white shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="font-bold text-xl text-black">Hidrovibes</div>
-      </div>
-    </header>
-    <div className="container mx-auto mt-4 flex justify-center">
-      <div className="mr-4 p-4 bg-gray-200 rounded-md">
-        <div className="text-lg font-semibold">Temperatura</div>
-        {/* Aquí puedes agregar cualquier otro contenido relacionado con la temperatura */}
-      </div>
-      <div className="ml-4 p-4 bg-gray-200 rounded-md">
-        <div className="text-lg font-semibold">Humedad</div>
-        {/* Aquí puedes agregar cualquier otro contenido relacionado con la humedad */}
+    function getCurrentTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+
+    }
+
+    return (
+      <div className="min-h-screen flex flex-col">
+      <header className="p-4 bg-white shadow-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="font-bold text-xl text-black">Hidrovibes</div>
+        </div>
+      </header>
+      <div className="flex-grow flex justify-center items-center">
+        <div className="w-full max-w-screen-xl">
+          <h1 className="font-serif text-2xl text-center font-medium text-sky-500">Sensor de PH</h1>
+          
+          <LineChart
+              width={1100}
+              height={500}
+              data={phData} // Mostrar datos de pH
+          >
+              <XAxis dataKey="time" />
+              <YAxis
+                  domain={[0, 14]} // Establecer el rango del eje Y para pH (0-14)
+                  label={{ value: 'pH', angle: -90, position: 'insideLeft' }}
+              />
+              <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+              <Line type="monotone" dataKey="ph" stroke="#FF3333" strokeWidth={3} />
+              <Tooltip />
+              <Legend />
+          </LineChart>
+        </div>
       </div>
     </div>
-  </div>
     
-  );
+    );
 }

@@ -20,6 +20,7 @@
     "recharts": "^2.12.5"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.29",
     "@types/node": "^20",
     "@types/paho-mqtt": "^1.0.10",
     "@types/react": "^18",
